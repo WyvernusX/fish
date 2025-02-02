@@ -23,25 +23,19 @@
     </style>
 </head>
 <body>
-    <!-- Image of the fish -->
     <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif">
-    
-    <!-- Audio element -->
     <audio id="fishAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music.mp3" type="audio/mp3">
     </audio>
 
     <script>
-        // Get the fish gif and audio elements
         const fishGif = document.getElementById('fishGif');
         const fishAudio = document.getElementById('fishAudio');
-
-        // Add a click event to toggle audio play/pause
         fishGif.addEventListener('click', () => {
             if (fishAudio.paused) {
-                fishAudio.play(); // Play the audio
+                fishAudio.play(); 
             } else {
-                fishAudio.pause(); // Pause the audio
+                fishAudio.pause(); 
             }
         });
     </script>
