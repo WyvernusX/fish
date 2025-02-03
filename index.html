@@ -27,15 +27,33 @@
     <audio id="fishAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music.mp3" type="audio/mp3">
     </audio>
+    <audio id="alternativeAudio" loop>
+        <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/alternative_music.mp3" type="audio/mp3">
+    </audio>
 
     <script>
         const fishGif = document.getElementById('fishGif');
         const fishAudio = document.getElementById('fishAudio');
+        const alternativeAudio = document.getElementById('alternativeAudio');
+
         fishGif.addEventListener('click', () => {
+            // 10% chance to play alternative audio
+            const randomChance = Math.random();
             if (fishAudio.paused) {
-                fishAudio.play(); 
+                if (randomChance < 0.1) {
+                    // Play alternative audio
+                    alternativeAudio.play();
+                    alternativeAudio.loop = true;
+                    fishAudio.pause();
+                } else {
+                    // Play the regular fish audio
+                    fishAudio.play();
+                    fishAudio.loop = true;
+                    alternativeAudio.pause();
+                }
             } else {
-                fishAudio.pause(); 
+                fishAudio.pause();
+                alternativeAudio.pause();
             }
         });
     </script>
