@@ -37,16 +37,13 @@
         const alternativeAudio = document.getElementById('alternativeAudio');
 
         fishGif.addEventListener('click', () => {
-            // 10% chance to play alternative audio
             const randomChance = Math.random();
             if (fishAudio.paused) {
                 if (randomChance < 0.1) {
-                    // Play alternative audio
                     alternativeAudio.play();
                     alternativeAudio.loop = true;
                     fishAudio.pause();
                 } else {
-                    // Play the regular fish audio
                     fishAudio.play();
                     fishAudio.loop = true;
                     alternativeAudio.pause();
