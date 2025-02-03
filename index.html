@@ -40,18 +40,16 @@
         const alternativeAudio = document.getElementById('alternativeAudio');
         const rareAudio = document.getElementById('rareAudio');
 
-        function pauseAllAudio() {
+        fishGif.addEventListener('click', () => {
+            const randomChance = Math.random();
+
             fishAudio.pause();
             alternativeAudio.pause();
             rareAudio.pause();
+
             fishAudio.currentTime = 0;
             alternativeAudio.currentTime = 0;
             rareAudio.currentTime = 0;
-        }
-
-        fishGif.addEventListener('click', () => {
-            const randomChance = Math.random();
-            pauseAllAudio();
 
             if (randomChance < 0.01) {
                 rareAudio.play();
