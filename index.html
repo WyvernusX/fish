@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false" id="fishGif">
+    <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
     <audio id="fishAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music.mp3" type="audio/mp3">
     </audio>
@@ -38,32 +38,24 @@
         const fishGif = document.getElementById('fishGif');
         const fishAudio = document.getElementById('fishAudio');
         const alternativeAudio = document.getElementById('alternativeAudio');
-         const rareAudio = document.getElementById('rareAudio');
+        const rareAudio = document.getElementById('rareAudio');
 
         fishGif.addEventListener('click', () => {
             const randomChance = Math.random();
             
-            if (fishAudio.paused && alternativeAudio.paused && rareAudio.paused) {
-                if (randomChance < 0.01) {
-                    rareAudio.play();
-                    rareAudio.loop = true;
-                    fishAudio.pause();
-                }
-                if (randomChance < 0.1) {
-                    alternativeAudio.play();
-                    alternativeAudio.loop = true;
-                    fishAudio.pause();
-                } else {
-                    fishAudio.play();
-                    fishAudio.loop = true;
-                    alternativeAudio.pause();
-                }
+            fishAudio.pause();
+            alternativeAudio.pause();
+            rareAudio.pause();
+
+            if (randomChance < 0.01) {
+                rareAudio.play();
+            } else if (randomChance < 0.1) {
+                alternativeAudio.play();
             } else {
-                fishAudio.pause();
-                alternativeAudio.pause();
-                rareAudio.pause();
+                fishAudio.play();
             }
         });
     </script>
 </body>
 </html>
+
