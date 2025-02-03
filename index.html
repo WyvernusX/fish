@@ -40,7 +40,6 @@
             const randomChance = Math.random();
             
             if (fishAudio.paused && alternativeAudio.paused) {
-                // If both audio files are paused, play one based on the random chance
                 if (randomChance < 0.1) {
                     alternativeAudio.play();
                     alternativeAudio.loop = true;
@@ -51,7 +50,6 @@
                     alternativeAudio.pause();
                 }
             } else {
-                // If any audio is playing, pause both
                 fishAudio.pause();
                 alternativeAudio.pause();
             }
