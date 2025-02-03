@@ -1,1 +1,1 @@
-a website i made while i was bored
+click on spinning fish 
