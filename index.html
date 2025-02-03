@@ -44,6 +44,11 @@
             const randomChance = Math.random();
             
             if (fishAudio.paused && alternativeAudio.paused && rareAudio.paused) {
+                if (randomChance < 0.01) {
+                    rareAudio.play();
+                    rareAudio.loop = true;
+                    fishAudio.pause();
+                }
                 if (randomChance < 0.1) {
                     alternativeAudio.play();
                     alternativeAudio.loop = true;
