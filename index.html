@@ -30,16 +30,20 @@
     <audio id="alternativeAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music2.mp3" type="audio/mp3">
     </audio>
+    <audio id="rareAudio" loop>
+        <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music3.mp3" type="audio/mp3">
+    </audio>
 
     <script>
         const fishGif = document.getElementById('fishGif');
         const fishAudio = document.getElementById('fishAudio');
         const alternativeAudio = document.getElementById('alternativeAudio');
+         const rareAudio = document.getElementById('rareAudio');
 
         fishGif.addEventListener('click', () => {
             const randomChance = Math.random();
             
-            if (fishAudio.paused && alternativeAudio.paused) {
+            if (fishAudio.paused && alternativeAudio.paused && rareAudio.paused) {
                 if (randomChance < 0.1) {
                     alternativeAudio.play();
                     alternativeAudio.loop = true;
@@ -52,6 +56,7 @@
             } else {
                 fishAudio.pause();
                 alternativeAudio.pause();
+                rareAudio.pause();
             }
         });
     </script>
