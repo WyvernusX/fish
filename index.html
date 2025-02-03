@@ -8,17 +8,21 @@
     <style>
         body {
             display: flex;
-            justify-content: center;  
-            align-items: center;      
-            height: 100vh;           
-            margin: 0;                
-            background-color: #FFFFFF; 
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #FFFFFF;
             flex-direction: column;
+            overflow: hidden; /* Prevents fish from spilling out of view */
         }
+
         img {
-            width: 50vw; 
-            height: auto; 
-            max-width: 100%; 
+            width: 50vw;
+            height: auto;
+            max-width: 100%;
+            position: absolute;
+            transition: all 0.2s ease; /* Smooth transition for movement */
         }
     </style>
 </head>
@@ -31,6 +35,8 @@
     <script>
         const fishGif = document.getElementById('fishGif');
         const fishAudio = document.getElementById('fishAudio');
+
+        // Toggle audio on clicking the fish
         fishGif.addEventListener('click', () => {
             if (fishAudio.paused) {
                 fishAudio.play(); 
@@ -38,7 +44,51 @@
                 fishAudio.pause(); 
             }
         });
+
+        let isBouncing = false;  // To track if the fish is bouncing
+
+        // Function to get random position within the window
+        function getRandomPosition() {
+            const maxWidth = window.innerWidth - fishGif.offsetWidth;
+            const maxHeight = window.innerHeight - fishGif.offsetHeight;
+            const randomX = Math.floor(Math.random() * maxWidth);
+            const randomY = Math.floor(Math.random() * maxHeight);
+            return { x: randomX, y: randomY };
+        }
+
+        // Function to animate the fish to a random position
+        function moveFish() {
+            const { x, y } = getRandomPosition();
+            fishGif.style.left = `${x}px`;
+            fishGif.style.top = `${y}px`;
+        }
+
+        // Center the fish in the window
+        function centerFish() {
+            fishGif.style.left = `50%`;
+            fishGif.style.top = `50%`;
+            fishGif.style.transform = `translate(-50%, -50%)`; // Center the fish
+        }
+
+        // Toggle bouncing effect on right-click (contextmenu)
+        fishGif.addEventListener('contextmenu', (e) => {
+            e.preventDefault(); // Prevents the default right-click context menu
+
+            if (isBouncing) {
+                // If the fish is bouncing, stop the bounce and center it
+                clearInterval(bounceInterval); // Stop the bouncing animation
+                centerFish(); // Center the fish
+            } else {
+                // If the fish is not bouncing, start the random movement
+                bounceInterval = setInterval(moveFish, 1000); // Move the fish every 1 second
+            }
+
+            // Toggle bouncing state
+            isBouncing = !isBouncing;
+        });
+
     </script>
 </body>
 </html>
+
 
