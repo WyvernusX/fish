@@ -46,6 +46,7 @@
         });
 
         let isBouncing = false;  // To track if the fish is bouncing
+        let bounceInterval;  // Holds the setInterval for bouncing
 
         // Function to get random position within the window
         function getRandomPosition() {
@@ -70,25 +71,23 @@
             fishGif.style.transform = `translate(-50%, -50%)`; // Center the fish
         }
 
-        // Toggle bouncing effect on right-click (contextmenu)
-        fishGif.addEventListener('contextmenu', (e) => {
-            e.preventDefault(); // Prevents the default right-click context menu
+        // Listen for the "E" key press to toggle bouncing
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'e' || e.key === 'E') {
+                if (isBouncing) {
+                    // If the fish is bouncing, stop the bounce and center it
+                    clearInterval(bounceInterval); // Stop the bouncing animation
+                    centerFish(); // Center the fish
+                } else {
+                    // If the fish is not bouncing, start the random movement
+                    bounceInterval = setInterval(moveFish, 1000); // Move the fish every 1 second
+                }
 
-            if (isBouncing) {
-                // If the fish is bouncing, stop the bounce and center it
-                clearInterval(bounceInterval); // Stop the bouncing animation
-                centerFish(); // Center the fish
-            } else {
-                // If the fish is not bouncing, start the random movement
-                bounceInterval = setInterval(moveFish, 1000); // Move the fish every 1 second
+                // Toggle bouncing state
+                isBouncing = !isBouncing;
             }
-
-            // Toggle bouncing state
-            isBouncing = !isBouncing;
         });
 
     </script>
 </body>
 </html>
-
-
