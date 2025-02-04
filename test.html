@@ -20,10 +20,21 @@
             height: auto; 
             max-width: 100%; 
         }
+        #nowPlaying {
+            color: black;
+            font-size: 20px;
+            margin-top: 20px;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #nowPlaying:hover {
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
     <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
+    <div id="nowPlaying">Now playing: Test</div>
     <audio id="fishAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music.mp3" type="audio/mp3">
     </audio>
@@ -35,3 +46,4 @@
     </audio>
 </body>
 </html>
+
