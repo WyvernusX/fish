@@ -28,36 +28,41 @@
     <script>
         const fishGif = document.getElementById("fishGif");
 
-        // Random initial position and velocity
-        let x = Math.random() * (window.innerWidth - fishGif.width);
-        let y = Math.random() * (window.innerHeight - fishGif.height);
-        let velocityX = (Math.random() * 4) + 2; // Random horizontal speed between 2 and 6
-        let velocityY = (Math.random() * 4) + 2; // Random vertical speed between 2 and 6
+        // Wait until the image is fully loaded to get its dimensions
+        fishGif.onload = () => {
+            // Fixed position and velocity
+            let x = Math.random() * (window.innerWidth - fishGif.width);
+            let y = Math.random() * (window.innerHeight - fishGif.height);
+            const velocityX = 4; // Fixed horizontal speed
+            const velocityY = 4; // Fixed vertical speed
 
-        // Function to update the fish position
-        function moveFish() {
-            x += velocityX;
-            y += velocityY;
+            // Function to update the fish position
+            function moveFish() {
+                x += velocityX;
+                y += velocityY;
 
-            // Check for horizontal boundary collision
-            if (x + fishGif.width > window.innerWidth || x < 0) {
-                velocityX = -velocityX;  // Reverse direction
+                // Check for horizontal boundary collision
+                if (x + fishGif.width > window.innerWidth || x < 0) {
+                    // Reverse direction on horizontal boundary hit
+                    velocityX = -velocityX;  
+                }
+
+                // Check for vertical boundary collision
+                if (y + fishGif.height > window.innerHeight || y < 0) {
+                    // Reverse direction on vertical boundary hit
+                    velocityY = -velocityY;  
+                }
+
+                // Set the new position
+                fishGif.style.left = `${x}px`;
+                fishGif.style.top = `${y}px`;
+
+                requestAnimationFrame(moveFish);  // Keep the animation going
             }
 
-            // Check for vertical boundary collision
-            if (y + fishGif.height > window.innerHeight || y < 0) {
-                velocityY = -velocityY;  // Reverse direction
-            }
-
-            // Set the new position
-            fishGif.style.left = `${x}px`;
-            fishGif.style.top = `${y}px`;
-
-            requestAnimationFrame(moveFish);  // Keep the animation going
-        }
-
-        // Start the movement
-        moveFish();
+            // Start the movement once the image is loaded
+            moveFish();
+        };
     </script>
 </body>
 </html>
