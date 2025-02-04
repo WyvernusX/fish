@@ -30,27 +30,43 @@
 
         // Wait until the image is fully loaded to get its dimensions
         fishGif.onload = () => {
-            // Fixed position and velocity
-            let x = Math.random() * (window.innerWidth - fishGif.width);
-            let y = Math.random() * (window.innerHeight - fishGif.height);
+            // Start at the center of the screen
+            let x = window.innerWidth / 2 - fishGif.width / 2;
+            let y = window.innerHeight / 2 - fishGif.height / 2;
+
+            // Generate a random destination point
+            let targetX = Math.random() * (window.innerWidth - fishGif.width);
+            let targetY = Math.random() * (window.innerHeight - fishGif.height);
+
             const velocityX = 4; // Fixed horizontal speed
             const velocityY = 4; // Fixed vertical speed
 
-            // Function to update the fish position
-            function moveFish() {
-                x += velocityX;
-                y += velocityY;
+            // Function to calculate the distance between two points
+            function calculateDistance(x1, y1, x2, y2) {
+                return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+            }
 
-                // Check for horizontal boundary collision
-                if (x + fishGif.width > window.innerWidth || x < 0) {
-                    // Reverse direction on horizontal boundary hit
-                    velocityX = -velocityX;  
+            // Function to move the fish towards the target point
+            function moveFish() {
+                // Calculate direction vector
+                let deltaX = targetX - x;
+                let deltaY = targetY - y;
+                let distance = calculateDistance(x, y, targetX, targetY);
+
+                // Normalize the direction vector
+                if (distance > 0) {
+                    deltaX /= distance;
+                    deltaY /= distance;
                 }
 
-                // Check for vertical boundary collision
-                if (y + fishGif.height > window.innerHeight || y < 0) {
-                    // Reverse direction on vertical boundary hit
-                    velocityY = -velocityY;  
+                // Update the fish's position
+                x += deltaX * velocityX;
+                y += deltaY * velocityY;
+
+                // If the fish is close enough to the target, set a new target
+                if (distance < velocityX) {
+                    targetX = Math.random() * (window.innerWidth - fishGif.width);
+                    targetY = Math.random() * (window.innerHeight - fishGif.height);
                 }
 
                 // Set the new position
