@@ -44,10 +44,12 @@
             // Define the fixed diagonal velocities (45-degree angles)
             const velocity = 4; // Same speed for all directions
 
-            // Randomly pick one of the 4 diagonal directions: top-left, top-right, bottom-left, bottom-right
-            let direction = Math.floor(Math.random() * 4);
+            // Now we will explicitly set the directions to move toward the corners
             let deltaX = 0;
             let deltaY = 0;
+
+            // Randomly pick one of the 4 diagonal directions to move towards corners
+            let direction = Math.floor(Math.random() * 4);
 
             // Set direction based on the random choice
             switch (direction) {
