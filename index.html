@@ -39,24 +39,26 @@
         const fishAudio = document.getElementById('fishAudio');
         const alternativeAudio = document.getElementById('alternativeAudio');
         const rareAudio = document.getElementById('rareAudio');
+        
+        let isPlaying = false;
 
         fishGif.addEventListener('click', () => {
             const randomChance = Math.random();
 
-            fishAudio.pause();
-            alternativeAudio.pause();
-            rareAudio.pause();
-
-            fishAudio.currentTime = 0;
-            alternativeAudio.currentTime = 0;
-            rareAudio.currentTime = 0;
-
-            if (randomChance < 0.01) {
-                rareAudio.play();
-            } else if (randomChance < 0.1) {
-                alternativeAudio.play();
+            if (isPlaying) {
+                fishAudio.pause();
+                alternativeAudio.pause();
+                rareAudio.pause();
+                isPlaying = false;
             } else {
-                fishAudio.play();
+                if (randomChance < 0.01) {
+                    rareAudio.play();
+                } else if (randomChance < 0.1) {
+                    alternativeAudio.play();
+                } else {
+                    fishAudio.play();
+                }
+                isPlaying = true;
             }
         });
     </script>
