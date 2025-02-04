@@ -28,9 +28,9 @@
             transition: opacity 1s ease-in-out; /* Smooth transition for fade */
         }
 
-        /* Fade in effect on hover over specific elements */
-        #nowPlaying:hover, #volumeSlider:hover {
-            opacity: 1;  /* Fade in when hovered */
+        /* Hover effect on text or volume slider to fade both elements in */
+        #nowPlaying:hover, #volumeSlider:hover, #nowPlaying:hover ~ #volumeSlider, #volumeSlider:hover ~ #nowPlaying {
+            opacity: 1;  /* Fade in both elements when hovering over either */
         }
 
         /* Adjust volume slider style */
@@ -45,7 +45,7 @@
 </head>
 <body>
     <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
-    <div id="nowPlaying">Now Playing: Test</div>
+    <div id="nowPlaying">Now playing: Test</div>
     <div class="volume-container">
         <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
     </div>
