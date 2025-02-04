@@ -80,10 +80,16 @@
                 // Boundary checks (reverse direction if hitting the edges)
                 if (x <= 0 || x + fishGif.width >= window.innerWidth) {
                     deltaX = -deltaX; // Reverse horizontal direction
+                    // Ensure the fish is not stuck in a corner by adjusting position slightly
+                    if (x <= 0) x = 0; // Prevent overshooting the left boundary
+                    if (x + fishGif.width >= window.innerWidth) x = window.innerWidth - fishGif.width; // Prevent overshooting the right boundary
                 }
 
                 if (y <= 0 || y + fishGif.height >= window.innerHeight) {
                     deltaY = -deltaY; // Reverse vertical direction
+                    // Ensure the fish is not stuck in a corner by adjusting position slightly
+                    if (y <= 0) y = 0; // Prevent overshooting the top boundary
+                    if (y + fishGif.height >= window.innerHeight) y = window.innerHeight - fishGif.height; // Prevent overshooting the bottom boundary
                 }
 
                 // Set the new position
