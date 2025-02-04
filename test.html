@@ -24,20 +24,22 @@
             color: black;
             font-size: 20px;
             margin-top: 20px;
-            opacity: 0;  /* Start fully transparent */
+            opacity: 0;  /* Initially transparent */
             transition: opacity 1s ease-in-out; /* Smooth transition for fade */
         }
-        #nowPlaying:hover, #volumeSlider:hover {
-            opacity: 1;  /* Fade in when hovered or on page load */
+
+        /* When hovering over the body (or specific area) both elements fade in */
+        body:hover #nowPlaying, body:hover #volumeSlider {
+            opacity: 1;  /* Fade in when hovered */
         }
+
+        /* Adjust volume slider style */
         .volume-container {
             margin-top: 10px; /* Adjusted margin to make slider closer to text */
         }
         #volumeSlider {
             width: 80%;  /* Adjusted width */
             margin-top: 10px; /* To make it closer to the text */
-            opacity: 0; /* Initially transparent */
-            transition: opacity 1s ease-in-out; /* Smooth transition */
         }
     </style>
 </head>
@@ -70,13 +72,6 @@
         volumeSlider.addEventListener('input', (event) => {
             fishAudio.volume = event.target.value; // Adjust the volume based on the slider
         });
-
-        // Fade in the text and volume slider on page load
-        window.onload = () => {
-            document.getElementById('nowPlaying').style.opacity = 1;
-            document.getElementById('volumeSlider').style.opacity = 1;
-            volumeSlider.value = 1;  // Reset slider to max volume (1) on page load
-        };
     </script>
 </body>
 </html>
