@@ -11,7 +11,7 @@
             align-items: center;      
             height: 100vh;           
             margin: 0;                
-            background-color: #000000; 
+            background-color: #FFFFFF; 
             overflow: hidden;  /* Prevents scrolling */
         }
         img {
@@ -71,8 +71,18 @@
 
             // Function to move the fish in 45-degree angle direction
             function moveFish() {
+                // Move the fish
                 x += deltaX;
                 y += deltaY;
+
+                // Boundary checks (reverse direction if hitting the edges)
+                if (x <= 0 || x + fishGif.width >= window.innerWidth) {
+                    deltaX = -deltaX; // Reverse horizontal direction
+                }
+
+                if (y <= 0 || y + fishGif.height >= window.innerHeight) {
+                    deltaY = -deltaY; // Reverse vertical direction
+                }
 
                 // Set the new position
                 fishGif.style.left = `${x}px`;
