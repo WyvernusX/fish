@@ -11,7 +11,7 @@
             align-items: center;      
             height: 100vh;           
             margin: 0;                
-            background-color: #000000; 
+            background-color: #FFFFFF; 
             overflow: hidden;  /* Prevents scrolling */
         }
         img {
@@ -30,73 +30,37 @@
 
         // Wait until the image is fully loaded to get its dimensions
         fishGif.onload = () => {
-            // Set initial position in a random corner
-            const corners = [
-                { x: 0, y: 0 }, // top-left
-                { x: window.innerWidth - fishGif.width, y: 0 }, // top-right
-                { x: 0, y: window.innerHeight - fishGif.height }, // bottom-left
-                { x: window.innerWidth - fishGif.width, y: window.innerHeight - fishGif.height } // bottom-right
-            ];
-            
-            // Choose a random corner
-            let { x, y } = corners[Math.floor(Math.random() * corners.length)];
+            // Set initial position in the center of the screen
+            let x = window.innerWidth / 2 - fishGif.width / 2;
+            let y = window.innerHeight / 2 - fishGif.height / 2;
 
-            // Define the fixed diagonal velocities (45-degree angles)
+            // Define the fixed velocity (speed) for movement
             const velocity = 4; // Same speed for all directions
 
-            // Now we will explicitly set the directions to move toward the corners
-            let deltaX = 0;
-            let deltaY = 0;
+            // Define random initial directions for the fish (45-degree angles)
+            let deltaX = (Math.random() > 0.5 ? 1 : -1) * velocity;
+            let deltaY = (Math.random() > 0.5 ? 1 : -1) * velocity;
 
-            // Randomly pick one of the 4 diagonal directions to move towards corners
-            let direction = Math.floor(Math.random() * 4);
-
-            // Set direction based on the random choice
-            switch (direction) {
-                case 0: // top-left
-                    deltaX = -velocity;
-                    deltaY = -velocity;
-                    break;
-                case 1: // top-right
-                    deltaX = velocity;
-                    deltaY = -velocity;
-                    break;
-                case 2: // bottom-left
-                    deltaX = -velocity;
-                    deltaY = velocity;
-                    break;
-                case 3: // bottom-right
-                    deltaX = velocity;
-                    deltaY = velocity;
-                    break;
-            }
-
-            // Function to move the fish in 45-degree angle direction
+            // Function to move the fish
             function moveFish() {
-                // Move the fish
+                // Update position based on velocity
                 x += deltaX;
                 y += deltaY;
 
-                // Boundary checks (reverse direction if hitting the edges)
+                // Boundary checks to make sure the fish bounces off the edges
                 if (x <= 0 || x + fishGif.width >= window.innerWidth) {
                     deltaX = -deltaX; // Reverse horizontal direction
-                    // Ensure the fish is not stuck in a corner by adjusting position slightly
-                    if (x <= 0) x = 0; // Prevent overshooting the left boundary
-                    if (x + fishGif.width >= window.innerWidth) x = window.innerWidth - fishGif.width; // Prevent overshooting the right boundary
                 }
 
                 if (y <= 0 || y + fishGif.height >= window.innerHeight) {
                     deltaY = -deltaY; // Reverse vertical direction
-                    // Ensure the fish is not stuck in a corner by adjusting position slightly
-                    if (y <= 0) y = 0; // Prevent overshooting the top boundary
-                    if (y + fishGif.height >= window.innerHeight) y = window.innerHeight - fishGif.height; // Prevent overshooting the bottom boundary
                 }
 
                 // Set the new position
                 fishGif.style.left = `${x}px`;
                 fishGif.style.top = `${y}px`;
 
-                // Continue the movement
+                // Continue the movement with the next frame
                 requestAnimationFrame(moveFish);
             }
 
