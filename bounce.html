@@ -3,25 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fish</title>
+    <title>Fish Bouncing</title>
     <style>
         body {
             display: flex;
             justify-content: center;  
             align-items: center;      
-            height: 80vh;           
+            height: 100vh;           
             margin: 0;                
             background-color: #FFFFFF; 
-            flex-direction: column;
+            overflow: hidden;  /* Prevents scrolling */
         }
         img {
-            width: 30vw; 
-            height: auto; 
-            max-width: 100%; 
+            width: 30vw;
+            height: 30vw; 
+            object-fit: cover;
+            position: absolute;  /* Allow it to move freely */
         }
     </style>
 </head>
 <body>
     <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
+    
+    <script>
+        const fishGif = document.getElementById("fishGif");
+
+        // Random initial position and velocity
+        let x = Math.random() * (window.innerWidth - fishGif.width);
+        let y = Math.random() * (window.innerHeight - fishGif.height);
+        let velocityX = (Math.random() * 4) + 2; // Random horizontal speed between 2 and 6
+        let velocityY = (Math.random() * 4) + 2; // Random vertical speed between 2 and 6
+
+        // Function to update the fish position
+        function moveFish() {
+            x += velocityX;
+            y += velocityY;
+
+            // Check for horizontal boundary collision
+            if (x + fishGif.width > window.innerWidth || x < 0) {
+                velocityX = -velocityX;  // Reverse direction
+                fishGif.style.transform = `rotate(${Math.random() * 360}deg)`; // Random rotation on bounce
+            }
+
+            // Check for vertical boundary collision
+            if (y + fishGif.height > window.innerHeight || y < 0) {
+                velocityY = -velocityY;  // Reverse direction
+                fishGif.style.transform = `rotate(${Math.random() * 360}deg)`; // Random rotation on bounce
+            }
+
+            // Set the new position
+            fishGif.style.left = `${x}px`;
+            fishGif.style.top = `${y}px`;
+
+            requestAnimationFrame(moveFish);  // Keep the animation going
+        }
+
+        // Start the movement
+        moveFish();
+    </script>
 </body>
 </html>
