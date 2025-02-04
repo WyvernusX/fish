@@ -11,14 +11,14 @@
             align-items: center;      
             height: 100vh;           
             margin: 0;                
-            background-color: #000000; 
-            overflow: hidden;  /* Prevents scrolling */
+            background-color: #FFFFFF; 
+            overflow: hidden;
         }
         img {
             width: 20vw;
             height: 10vw; 
             object-fit: cover;
-            position: absolute;  /* Allow it to move freely */
+            position: absolute;
         }
     </style>
 </head>
@@ -28,43 +28,40 @@
     <script>
         const fishGif = document.getElementById("fishGif");
 
-        // Wait until the image is fully loaded to get its dimensions
-        fishGif.onload = () => {
-            // Set initial position in the center of the screen
+        fishGif.onload = () => {\
+            
             let x = window.innerWidth / 2 - fishGif.width / 2;
             let y = window.innerHeight / 2 - fishGif.height / 2;
 
-            // Define the fixed velocity (speed) for movement
-            const velocity = 4; // Same speed for all directions
+            const velocity = 4; 
 
-            // Define random initial directions for the fish (45-degree angles)
+
             let deltaX = (Math.random() > 0.5 ? 1 : -1) * velocity;
             let deltaY = (Math.random() > 0.5 ? 1 : -1) * velocity;
 
-            // Function to move the fish
+
             function moveFish() {
-                // Update position based on velocity
+
                 x += deltaX;
                 y += deltaY;
 
-                // Boundary checks to make sure the fish bounces off the edges
+
                 if (x <= 0 || x + fishGif.width >= window.innerWidth) {
-                    deltaX = -deltaX; // Reverse horizontal direction
+                    deltaX = -deltaX;
                 }
 
                 if (y <= 0 || y + fishGif.height >= window.innerHeight) {
-                    deltaY = -deltaY; // Reverse vertical direction
+                    deltaY = -deltaY;
                 }
 
-                // Set the new position
                 fishGif.style.left = `${x}px`;
                 fishGif.style.top = `${y}px`;
 
-                // Continue the movement with the next frame
+
                 requestAnimationFrame(moveFish);
             }
 
-            // Start the movement once the image is loaded
+
             moveFish();
         };
     </script>
