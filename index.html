@@ -51,6 +51,10 @@
                 rareAudio.pause();
                 isPlaying = false;
             } else {
+                fishAudio.currentTime = 0;
+                alternativeAudio.currentTime = 0;
+                rareAudio.currentTime = 0;
+
                 if (randomChance < 0.01) {
                     rareAudio.play();
                 } else if (randomChance < 0.1) {
