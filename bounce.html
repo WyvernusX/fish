@@ -28,23 +28,20 @@
     <script>
         const fishGif = document.getElementById("fishGif");
 
-        fishGif.onload = () => {\
+        fishGif.onload = () => {
             
             let x = window.innerWidth / 2 - fishGif.width / 2;
             let y = window.innerHeight / 2 - fishGif.height / 2;
 
             const velocity = 4; 
 
-
             let deltaX = (Math.random() > 0.5 ? 1 : -1) * velocity;
             let deltaY = (Math.random() > 0.5 ? 1 : -1) * velocity;
-
 
             function moveFish() {
 
                 x += deltaX;
                 y += deltaY;
-
 
                 if (x <= 0 || x + fishGif.width >= window.innerWidth) {
                     deltaX = -deltaX;
@@ -54,13 +51,12 @@
                     deltaY = -deltaY;
                 }
 
+                // FIXED HERE: Template literals to set position correctly
                 fishGif.style.left = `${x}px`;
                 fishGif.style.top = `${y}px`;
 
-
                 requestAnimationFrame(moveFish);
             }
-
 
             moveFish();
         };
