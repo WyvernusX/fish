@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="https://raw.githubusercontent.com/WyvernusX/fish/main/favicion.png" type="image/png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fish</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;  
+            align-items: center;      
+            height: 100vh;           
+            margin: 0;                
+            background-color: #FFFFFF; 
+            flex-direction: column;
+        }
+        img {
+            width: 50vw; 
+            height: auto; 
+            max-width: 100%; 
+        }
+        #nowPlaying, #volumeSlider {
+            color: black;
+            font-size: 20px;
+            margin-top: 20px;
+            opacity: 0;  /* Initially transparent */
+            transition: opacity 1s ease-in-out; /* Smooth transition for fade */
+        }
 
+        /* Hover effect on text or volume slider to fade both elements in */
+        #nowPlaying:hover, #volumeSlider:hover, #nowPlaying:hover ~ #volumeSlider, #volumeSlider:hover ~ #nowPlaying {
+            opacity: 1;  /* Fade in both elements when hovering over either */
+        }
+
+        /* Adjust volume slider style */
+        .volume-container {
+            margin-top: 10px; /* Adjusted margin to make slider closer to text */
+        }
+        #volumeSlider {
+            width: 80%;  /* Adjusted width */
+            margin-top: 10px; /* To make it closer to the text */
+        }
+    </style>
+</head>
+<body>
+    <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
+    <div id="nowPlaying">Now playing: Test</div>
+    <div class="volume-container">
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+    </div>
+    <audio id="fishAudio" loop>
+        <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="alternativeAudio" loop>
+        <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music2.mp3" type="audio/mp3">
+    </audio>
+    <audio id="rareAudio" loop>
+        <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music3.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        // Play the fish audio as soon as the page loads
+        const fishAudio = document.getElementById('fishAudio');
+        fishAudio.play();
+
+        // Reset the volume to 1 (full volume) when the page is refreshed
+        fishAudio.volume = 1;
+
+        // Volume control functionality
+        const volumeSlider = document.getElementById('volumeSlider');
+        volumeSlider.addEventListener('input', (event) => {
+            fishAudio.volume = event.target.value; // Adjust the volume based on the slider
+        });
+    </script>
+</body>
+</html>
