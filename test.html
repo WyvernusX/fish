@@ -60,6 +60,9 @@
         const fishAudio = document.getElementById('fishAudio');
         fishAudio.play();
 
+        // Reset the volume to 1 (full volume) when the page is refreshed
+        fishAudio.volume = 1;
+
         // Volume control functionality
         const volumeSlider = document.getElementById('volumeSlider');
         volumeSlider.addEventListener('input', (event) => {
@@ -70,6 +73,7 @@
         window.onload = () => {
             document.getElementById('nowPlaying').style.opacity = 1;
             document.getElementById('volumeSlider').style.opacity = 1;
+            volumeSlider.value = 1;  // Reset slider to max volume (1) on page load
         };
     </script>
 </body>
