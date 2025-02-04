@@ -11,7 +11,7 @@
             align-items: center;      
             height: 100vh;           
             margin: 0;                
-            background-color: #FFFFFF; 
+            background-color: #000000; 
             overflow: hidden;  /* Prevents scrolling */
         }
         img {
@@ -30,50 +30,56 @@
 
         // Wait until the image is fully loaded to get its dimensions
         fishGif.onload = () => {
-            // Start at the center of the screen
-            let x = window.innerWidth / 2 - fishGif.width / 2;
-            let y = window.innerHeight / 2 - fishGif.height / 2;
+            // Set initial position in a random corner
+            const corners = [
+                { x: 0, y: 0 }, // top-left
+                { x: window.innerWidth - fishGif.width, y: 0 }, // top-right
+                { x: 0, y: window.innerHeight - fishGif.height }, // bottom-left
+                { x: window.innerWidth - fishGif.width, y: window.innerHeight - fishGif.height } // bottom-right
+            ];
+            
+            // Choose a random corner
+            let { x, y } = corners[Math.floor(Math.random() * corners.length)];
 
-            // Generate a random destination point
-            let targetX = Math.random() * (window.innerWidth - fishGif.width);
-            let targetY = Math.random() * (window.innerHeight - fishGif.height);
+            // Define the fixed diagonal velocities (45-degree angles)
+            const velocity = 4; // Same speed for all directions
 
-            const velocityX = 4; // Fixed horizontal speed
-            const velocityY = 4; // Fixed vertical speed
+            // Randomly pick one of the 4 diagonal directions: top-left, top-right, bottom-left, bottom-right
+            let direction = Math.floor(Math.random() * 4);
+            let deltaX = 0;
+            let deltaY = 0;
 
-            // Function to calculate the distance between two points
-            function calculateDistance(x1, y1, x2, y2) {
-                return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+            // Set direction based on the random choice
+            switch (direction) {
+                case 0: // top-left
+                    deltaX = -velocity;
+                    deltaY = -velocity;
+                    break;
+                case 1: // top-right
+                    deltaX = velocity;
+                    deltaY = -velocity;
+                    break;
+                case 2: // bottom-left
+                    deltaX = -velocity;
+                    deltaY = velocity;
+                    break;
+                case 3: // bottom-right
+                    deltaX = velocity;
+                    deltaY = velocity;
+                    break;
             }
 
-            // Function to move the fish towards the target point
+            // Function to move the fish in 45-degree angle direction
             function moveFish() {
-                // Calculate direction vector
-                let deltaX = targetX - x;
-                let deltaY = targetY - y;
-                let distance = calculateDistance(x, y, targetX, targetY);
-
-                // Normalize the direction vector
-                if (distance > 0) {
-                    deltaX /= distance;
-                    deltaY /= distance;
-                }
-
-                // Update the fish's position
-                x += deltaX * velocityX;
-                y += deltaY * velocityY;
-
-                // If the fish is close enough to the target, set a new target
-                if (distance < velocityX) {
-                    targetX = Math.random() * (window.innerWidth - fishGif.width);
-                    targetY = Math.random() * (window.innerHeight - fishGif.height);
-                }
+                x += deltaX;
+                y += deltaY;
 
                 // Set the new position
                 fishGif.style.left = `${x}px`;
                 fishGif.style.top = `${y}px`;
 
-                requestAnimationFrame(moveFish);  // Keep the animation going
+                // Continue the movement
+                requestAnimationFrame(moveFish);
             }
 
             // Start the movement once the image is loaded
