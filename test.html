@@ -30,11 +30,21 @@
         #nowPlaying:hover {
             opacity: 1;  /* Fade in when hovered */
         }
+        .volume-container {
+            margin-top: 20px;
+        }
+        #volumeSlider {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
     <div id="nowPlaying">Now playing: Test</div>
+    <div class="volume-container">
+        <label for="volumeSlider">Volume:</label>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+    </div>
     <audio id="fishAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music.mp3" type="audio/mp3">
     </audio>
@@ -44,5 +54,17 @@
     <audio id="rareAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music3.mp3" type="audio/mp3">
     </audio>
+
+    <script>
+        // Play the fish audio as soon as the page loads
+        const fishAudio = document.getElementById('fishAudio');
+        fishAudio.play();
+
+        // Volume control functionality
+        const volumeSlider = document.getElementById('volumeSlider');
+        volumeSlider.addEventListener('input', (event) => {
+            fishAudio.volume = event.target.value; // Adjust the volume based on the slider
+        });
+    </script>
 </body>
 </html>
