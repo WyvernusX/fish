@@ -11,7 +11,7 @@
             align-items: center;      
             height: 100vh;           
             margin: 0;                
-            background-color: #000000; 
+            background-color: #FFFFFF; 
             overflow: hidden;  /* Prevents scrolling */
         }
         img {
@@ -42,13 +42,11 @@
             // Check for horizontal boundary collision
             if (x + fishGif.width > window.innerWidth || x < 0) {
                 velocityX = -velocityX;  // Reverse direction
-                fishGif.style.transform = `rotate(${Math.random() * 360}deg)`; // Random rotation on bounce
             }
 
             // Check for vertical boundary collision
             if (y + fishGif.height > window.innerHeight || y < 0) {
                 velocityY = -velocityY;  // Reverse direction
-                fishGif.style.transform = `rotate(${Math.random() * 360}deg)`; // Random rotation on bounce
             }
 
             // Set the new position
