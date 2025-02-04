@@ -20,21 +20,22 @@
             height: auto; 
             max-width: 100%; 
         }
-        #nowPlaying {
+        #nowPlaying, #volumeSlider {
             color: black;
             font-size: 20px;
             margin-top: 20px;
             opacity: 0;  /* Start fully transparent */
             transition: opacity 0.5s ease-in-out;
         }
-        #nowPlaying:hover {
-            opacity: 1;  /* Fade in when hovered */
+        #nowPlaying:hover, #volumeSlider:hover {
+            opacity: 1;  /* Fade in when hovered or on page load */
         }
         .volume-container {
-            margin-top: 20px;
+            margin-top: 10px; /* Adjusted margin to make slider closer to text */
         }
         #volumeSlider {
-            width: 100%;
+            width: 80%;  /* Adjusted width */
+            margin-top: 10px; /* To make it closer to the text */
         }
     </style>
 </head>
@@ -42,7 +43,6 @@
     <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
     <div id="nowPlaying">Now playing: Test</div>
     <div class="volume-container">
-        <label for="volumeSlider">Volume:</label>
         <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
     </div>
     <audio id="fishAudio" loop>
@@ -65,6 +65,12 @@
         volumeSlider.addEventListener('input', (event) => {
             fishAudio.volume = event.target.value; // Adjust the volume based on the slider
         });
+
+        // Fade in the text and volume slider on page load
+        window.onload = () => {
+            document.getElementById('nowPlaying').style.opacity = 1;
+            document.getElementById('volumeSlider').style.opacity = 1;
+        };
     </script>
 </body>
 </html>
