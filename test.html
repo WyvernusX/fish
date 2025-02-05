@@ -56,12 +56,12 @@
 
                 if (x <= 0 || x + fishGif.width >= window.innerWidth) {
                     deltaX = -deltaX;
-                    document.body.style.backgroundColor = getRandomColor(); // Change background color on horizontal wall hit
+                    document.body.style.backgroundColor = getRandomColor(); 
                 }
 
                 if (y <= 0 || y + fishGif.height >= window.innerHeight) {
                     deltaY = -deltaY;
-                    document.body.style.backgroundColor = getRandomColor(); // Change background color on vertical wall hit
+                    document.body.style.backgroundColor = getRandomColor();
                 }
 
                 fishGif.style.left = `${x}px`;
