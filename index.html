@@ -16,15 +16,20 @@
             background-color: #FFFFFF; 
             flex-direction: column;
         }
+
         img {
             width: 50vw; 
             height: auto; 
             max-width: 100%; 
         }
+        #fishGif:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <img src="https://raw.githubusercontent.com/WyvernusX/fish/main/fishh.gif" alt="fish" id="fishGif" draggable="false">
+
     <audio id="fishAudio" loop>
         <source src="https://raw.githubusercontent.com/WyvernusX/fish/main/music.mp3" type="audio/mp3">
     </audio>
@@ -63,13 +68,13 @@
             }
         });
 
-         document.addEventListener('keydown', (event) => {
+        document.addEventListener('keydown', (event) => {
             if (event.code === 'Space') {
                 window.location.href = 'https://wyvernusx.github.io/fish/bounce.html'; 
             }
         });
 
-         document.addEventListener('keydown', (event) => {
+        document.addEventListener('keydown', (event) => {
             if (event.code === 'KeyE') {
                 window.location.href = 'https://wyvernusx.github.io/fish/test.html'; 
             }
